@@ -1,0 +1,37 @@
+{	
+	"_comment": ["Currently tested on sway/wayland, You can try on hyprland as well but not tested"],
+	"CURRENT_WM": "sway",
+	"VIDEO_PATH": "~/Funcher/assets/pip_1080p.mov",
+
+	"_comment": ["This is main Video loop must include all timestamp"],
+	"VIDEO_CTRL": {
+		"START": "0.10",
+		"IDLE_LOOP": ["2.9", "8.8"],
+		"EXIT": ["11.1", "11.5"]
+	},
+
+	"_comment": ["Main Launcher config use it like using in terminal"],
+	"LAUNCHER": {
+		"APP_CLASS": "Wofi",
+		"APP_ID": "wofi",
+		"RUN_ARG": "wofi --show drun --normal-window",
+		"DELAY_START": "1"
+	},
+
+	"OTHERS": {
+		"_comment": ["These experimental for hyprland use workspace instead of scratchpad to show/hide app"],
+		"CUSTOM_WORKSPACE": "21"
+	},
+
+	"_comment": ["(OPTIONAL) Input base player to get input key use -k, Don't add exit app key like esc/enter it might overlap with VIDEO_CTRL > EXIT"],
+	"_comment": ["input_key: [start_timestamp, end_timestamp, hide>start] = Hide APP while playing this key then play START, Also have hide>idle "],
+	"INPUT": {
+		"103": ["12.68", "12.82"],
+		"up": ["12.68", "12.82"],
+		"108": ["12.18", "12.32"],
+		"down": ["12.18", "12.32"],
+		"15": ["13.2", "13.5"],
+		"middle": ["9", "10.5", "hide>start"]
+	}
+
+}

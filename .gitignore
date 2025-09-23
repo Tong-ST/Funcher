@@ -1,0 +1,5 @@
+Ignore compiled files
+keyboard_listener
+
+*.o
+*.mov
