@@ -7,7 +7,7 @@
 	"VIDEO_CTRL": {
 		"START": "0.15",
 		"IDLE_LOOP": ["2.9", "8.8"],
-		"EXIT": ["11", "11.45"]
+		"EXIT": ["11", "11.6"]
 	},
 
 	"_comment": ["Main Launcher config use it like using in terminal"],
