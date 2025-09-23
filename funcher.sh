@@ -104,11 +104,10 @@ main () {
 
 	touch "$LOCKFILE"
 	
+	mpv_play_segment $START
+
 	wait_for_window "mpv"
 	window_marker "mpv" "mympv"
-
-	# Play opening animation
-	mpv_play_segment $START
 
 	# Move to focus workspace
 	window_ctrl "mympv" "$MOVE_TO_CURRENT"
@@ -393,7 +392,8 @@ launcher_selected () {
 	wait_for_window "$app_launched"
     	
 	window_marker "$app_launched" "myapp"
-
+	window_focus "myapp"
+	
 	rm -f "$LOCKFILE"
 	# window_ctrl "myapp" "$SCRATCHPAD_SHOW" # Dev test with rofi, You may need to move to scratchpad in WM .config 
 	# then after app start just show it, But don't needed for most app, So just noted that

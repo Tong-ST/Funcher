@@ -2,7 +2,7 @@
 
 What it does, It just simple script that call [mpv](mpv.io) media playback to play custom video and run in background..
 
-So my concept here to make it work with others app launcher that already great like `wofi`, or you can set to run your others fav app as well
+So my concept here to make it work with others app launcher that already great like `wofi` or you can set to run your others fav app as well
 
 ![Funcher Demo](assets/funcher_demo.gif)
 
@@ -170,6 +170,8 @@ In this very first stage i just want to expand to be reliable on others WMs curr
 ## Thanks & Credit
 - [mpv media player](https://mpv.io) is heart of this project
 - [libinput](https://wiki.archlinux.org/title/Libinput) For easy to integrate input listening tool
+- [bucklespring](https://github.com/zevv/bucklespring) For the amazing keyboard sound effect, Also inspiration for input listening base video playback
+- [my own Sway .config](https://www.github.com/Tong-ST/pip-boy-sway) In case you want to see my whole setup
 
 Special thanks to creator of Fallout mods
 - [Pipboy animation mod](www.nexusmods.com/newvegas/mods/91200)

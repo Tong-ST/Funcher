@@ -5,9 +5,9 @@
 
 	"_comment": ["This is main Video loop must include all timestamp"],
 	"VIDEO_CTRL": {
-		"START": "0.10",
+		"START": "0.15",
 		"IDLE_LOOP": ["2.9", "8.8"],
-		"EXIT": ["11.1", "11.5"]
+		"EXIT": ["11", "11.45"]
 	},
 
 	"_comment": ["Main Launcher config use it like using in terminal"],
@@ -26,10 +26,10 @@
 	"_comment": ["(OPTIONAL) Input base player to get input key use -k, Don't add exit app key like esc/enter it might overlap with VIDEO_CTRL > EXIT"],
 	"_comment": ["input_key: [start_timestamp, end_timestamp, hide>start] = Hide APP while playing this key then play START, Also have hide>idle "],
 	"INPUT": {
-		"103": ["12.68", "12.82"],
-		"up": ["12.68", "12.82"],
-		"108": ["12.18", "12.32"],
-		"down": ["12.18", "12.32"],
+		"103": ["12.64", "12.82"],
+		"up": ["12.64", "12.82"],
+		"108": ["12.14", "12.32"],
+		"down": ["12.14", "12.32"],
 		"15": ["13.2", "13.5"],
 		"middle": ["9", "10.5", "hide>start"]
 	}
