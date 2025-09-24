@@ -85,10 +85,10 @@ For ready to use, I install in $HOME directory if you want to changes, You may n
     ```
 
 2. **Setup Config**
-- In [Releases](https://github.com/Tong-ST/Funcher/releases/) you'll see pip_1080p.tar.xz grab and put it on Funcher/assets
+- In [Releases](https://github.com/Tong-ST/Funcher/releases/) you'll see pip-boy-vdo.tar.xz grab and put it on Funcher/assets
     
     ``` 
-    tar xfv pip_1080p.tar.xz
+    tar xfv pip-boy-vdo.tar.xz
     cp pip_1080p.mov $HOME/Funcher/assets/
     ```
 - Setup your config files This setup is for `sway` only others wayland you may need different config that do the same thing
@@ -147,6 +147,8 @@ For normal use case just set keybinding for each app point those config file lik
 ## Contribution
 In this project I consider 2 main roles of contribute to community
 1. **Creator** - This project is mainly on creativity side, For example VDO editing as you can see, it's just pure video editing skill, you can craft your own VIDEO what ever you want, No coding experience are required, just tinker with config file should be enough  
+    - Some tips I've learn, For new video edit, If one time animation like click down do gear spin, I use base clip that about to go idle loop, And edit edit from that so when this anim done it trasit smoothly to idle
+    - Background remover mostly use chroma-key, But if background are not separate, You might need to hand cut with Rotoscoping or use object-detection
 
 2. **Developer** - This very early build is just shell script, I think there are a ton of room to improve like moving to others language like `C` or `lua` I don't know yet in C maybe you can communicate seamless with input listener, or lua maybe it can improve more playback performance with mpv
 also expand to different WMs / Distro as possible
