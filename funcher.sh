@@ -73,13 +73,7 @@ nohup "$KEY_LISTEN" > /dev/null 2>&1 &
 WM=$(jq -r '.CURRENT_WM' "$CONFIG")
 VIDEO_PATH=$(jq -r '.VIDEO_PATH' "$CONFIG")
 VIDEO_NAME=$(basename $VIDEO_PATH)
-START=$(jq -r '.VIDEO_CTRL["START"]' "$CONFIG")
-IDLE_START=$(jq -r '.VIDEO_CTRL["IDLE_LOOP"][0]' "$CONFIG")
-IDLE_END=$(jq -r '.VIDEO_CTRL["IDLE_LOOP"][1]' "$CONFIG")
-EXIT_START=$(jq -r '.VIDEO_CTRL["EXIT"][0]' "$CONFIG")
-EXIT_END=$(jq -r '.VIDEO_CTRL["EXIT"][1]' "$CONFIG")
-END_COOLDOWN=$(echo "$EXIT_END - $EXIT_START" | bc )
-
+VIDEO_FPS=$(jq -r '.VIDEO_FPS' "$CONFIG")
 APP_CLASS=$(jq -r '.LAUNCHER["APP_CLASS"]' "$CONFIG")
 LAUNCHER=$(jq -r '.LAUNCHER["APP_ID"]' "$CONFIG")
 LAUNCHER_ARG=$(jq -r '.LAUNCHER["RUN_ARG"]' "$CONFIG")
@@ -89,14 +83,20 @@ CUSTOM_WS=$(jq -r '.OTHERS["CUSTOM_WORKSPACE"]' "$CONFIG")
 
 declare -A ALL_INPUT
 
-# Window Ctrl
 MOVE_TO_CURRENT="move_to_current"
 SCRATCHPAD_SHOW="scratchpad_show"
 MOVE_TO_SCRATCHPAD="move_to_scratchpad"
 
-
 main () {
-	# Start socket
+	# Main vars with custom function
+	START=$(convert_time_to_decimal "$(jq -r '.VIDEO_CTRL["START"]' "$CONFIG")" "$VIDEO_FPS")
+	IDLE_START=$(convert_time_to_decimal "$(jq -r '.VIDEO_CTRL["IDLE_LOOP"][0]' "$CONFIG")" "$VIDEO_FPS")
+	IDLE_END=$(convert_time_to_decimal "$(jq -r '.VIDEO_CTRL["IDLE_LOOP"][1]' "$CONFIG")" "$VIDEO_FPS")
+	EXIT_START=$(convert_time_to_decimal "$(jq -r '.VIDEO_CTRL["EXIT"][0]' "$CONFIG")" "$VIDEO_FPS")
+	EXIT_END=$(convert_time_to_decimal "$(jq -r '.VIDEO_CTRL["EXIT"][1]' "$CONFIG")" "$VIDEO_FPS")
+	END_COOLDOWN=$(echo "$EXIT_END - $EXIT_START" | bc )
+
+	# Start main function
 	mpv_socket
 
 	# Preload json
@@ -142,13 +142,50 @@ main () {
 
 }
 
+
+convert_time_to_decimal() {
+    	local timecode=$1
+    	local fps=$2
+    	local minutes=0
+    	local seconds=0
+    	local frames=0
+
+    	if [[ "$timecode" =~ ([0-9]+):([0-9]+)\;([0-9]+) ]]; then
+        	minutes=${BASH_REMATCH[1]}
+        	seconds=${BASH_REMATCH[2]}
+        	frames=${BASH_REMATCH[3]}
+        	echo "($minutes * 60) + $seconds + ($frames / $fps)" | bc -l
+
+    	elif [[ "$timecode" =~ ([0-9]+)\;([0-9]+) ]]; then
+        	seconds=${BASH_REMATCH[1]}
+        	frames=${BASH_REMATCH[2]}
+        	echo "$seconds + ($frames / $fps)" | bc -l
+
+    	else
+        	echo "$timecode"
+    	fi
+}
+
 preload_input () {
     	while IFS="=" read -r key values; do
-        	ALL_INPUT["$key"]="$values"
+		
+		if [ -z "$key" ]; then
+            		continue
+        	fi
+
+        	local start_time=$(echo "$values" | awk '{print $1}')
+        	local end_time=$(echo "$values" | awk '{print $2}')
+        	local flag=$(echo "$values" | awk '{print $3}')
+
+        	local start_decimal=$(convert_time_to_decimal "$start_time" "$VIDEO_FPS")
+        	local end_decimal=$(convert_time_to_decimal "$end_time" "$VIDEO_FPS")
+        	local duration=$(echo "$end_decimal - $start_decimal" | bc -l)
+
+        	# Store the final
+		ALL_INPUT["$key"]="$start_decimal $end_decimal $duration $flag"
+
     	done < <(
-        	jq -r '.INPUT
-        	| to_entries[]
-		| "\(.key)=\(.value[0]) \(.value[1]) \((.value[1]|tonumber) - (.value[0]|tonumber)) \(.value[2])"' "$CONFIG"
+        	jq -r '.INPUT | to_entries[] | "\(.key)=\(.value[0]) \(.value[1]) \(.value[2])"' "$CONFIG"
     	)
 }
 
@@ -179,7 +216,6 @@ play_input_anim () {
 			touch "$LOCKFILE"
 			input_timestamp=(${ALL_INPUT[$token]:-})
 			anim_control ${input_timestamp[0]} ${input_timestamp[2]} ${input_timestamp[3]} 
-
 			rm -f "$LOCKFILE"
 		fi
 		sleep 0.05
