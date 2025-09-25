@@ -18,7 +18,7 @@
 		"APP_CLASS": "Calcurse",
 		"APP_ID": "calcurseTerm",
 		"RUN_ARG": "alacritty --config-file $HOME/.config/alacritty/alac_tran.toml --class calcurseTerm -e calcurse",
-		"DELAY_START": "1"
+		"DELAY_START": "0.5"
 	},
 
 	"OTHERS": {
