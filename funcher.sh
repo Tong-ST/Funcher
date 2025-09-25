@@ -149,21 +149,28 @@ convert_time_to_decimal() {
     	local minutes=0
     	local seconds=0
     	local frames=0
+		local result=""
 
     	if [[ "$timecode" =~ ([0-9]+):([0-9]+)\;([0-9]+) ]]; then
         	minutes=${BASH_REMATCH[1]}
         	seconds=${BASH_REMATCH[2]}
         	frames=${BASH_REMATCH[3]}
-        	echo "($minutes * 60) + $seconds + ($frames / $fps)" | bc -l
+		result=$(echo "($minutes * 60) + $seconds + ($frames / $fps)" | bc -l)
 
     	elif [[ "$timecode" =~ ([0-9]+)\;([0-9]+) ]]; then
         	seconds=${BASH_REMATCH[1]}
         	frames=${BASH_REMATCH[2]}
-        	echo "$seconds + ($frames / $fps)" | bc -l
+		result=$(echo "$seconds + ($frames / $fps)" | bc -l)
 
-    	else
-        	echo "$timecode"
+		else
+	        result=$timecode
     	fi
+
+		if [[ "$result" == .* ]]; then
+			result="0$result"
+		fi
+
+		echo "$result"
 }
 
 preload_input () {

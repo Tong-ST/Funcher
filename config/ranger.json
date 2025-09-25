@@ -5,10 +5,9 @@
 
 	"_comment": ["This is main Video loop must include all timestamp"],
 	"_comment": ["Time format of VDO now MIN:SEC;FRAME For example 1:12;30 would be 1 minute 12 second in frame 30"],
-	"_comment": ["Except for below 0 second, Just use like 0.15 it will start at frame 15"],
 	"VIDEO_FPS": "60",
 	"VIDEO_CTRL": {
-		"START": "0.15",
+		"START": "0;15",
 		"IDLE_LOOP": ["2;50", "8;50"],
 		"EXIT": ["11;00", "11;30"]
 	},
