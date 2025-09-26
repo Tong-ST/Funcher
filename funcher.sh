@@ -3,7 +3,7 @@
 # Program Requirement (debian base) others may has different packages name
 # DEP: socat, bc, jq, build-essential libinput-dev libudev-dev 
 # APP: mpv, wofi or others app you want to try..
-# DE: Currently on sway/wayland, i3/x11 still have problem with mpv transparent background, And in hyprland not tested yet but been added some potential support
+# DE: Currently on sway/wayland and i3/x11, in hyprland not tested yet but been added some potential support
 # For input base anim need to add input group in debian ` sudo usermod -aG input $USER `
 
 # Build Check
@@ -78,6 +78,11 @@ APP_CLASS=$(jq -r '.LAUNCHER["APP_CLASS"]' "$CONFIG")
 LAUNCHER=$(jq -r '.LAUNCHER["APP_ID"]' "$CONFIG")
 LAUNCHER_ARG=$(jq -r '.LAUNCHER["RUN_ARG"]' "$CONFIG")
 DELAY_LAUNCHER_TIMER=$(jq -r '.LAUNCHER["DELAY_START"]' "$CONFIG")
+OFFSET_X=$(jq -r '.LAUNCHER["OFFSET_XY"][0]' "$CONFIG")
+OFFSET_Y=$(jq -r '.LAUNCHER["OFFSET_XY"][1]' "$CONFIG")
+WIDTH=$(jq -r '.LAUNCHER["WIDTH_HEIGHT"][0]' "$CONFIG")
+HEIGHT=$(jq -r '.LAUNCHER["WIDTH_HEIGHT"][1]' "$CONFIG")
+
 
 CUSTOM_WS=$(jq -r '.OTHERS["CUSTOM_WORKSPACE"]' "$CONFIG")
 
@@ -265,7 +270,6 @@ window_marker () {
 	local mark_name=$2
 
 	case $WM in
-		i3) i3-msg "[class=\"$APP_CLASS\"] mark $mark_name" ;;
 		sway) swaymsg "[app_id=\"$window\"] mark $mark_name" ;;
 		hyprland)
 			addr=$(hyprctl client -j | jq -r ".[] | select(.class == \"$window\") | .addresss" | head -n1)
@@ -281,13 +285,6 @@ window_ctrl() {
    	local action=$2
 
 	case $WM in
-        i3)
-            case $action in
-                move_to_current) i3-msg "[con_mark=\"$mark_name\"] move to workspace current" ;;
-                scratchpad_show) i3-msg "[con_mark=\"$mark_name\"] scratchpad show" ;;
-                move_to_scratchpad) i3-msg "[con_mark=\"$mark_name\"] move scratchpad" ;;
-            esac
-            ;;
         sway)
             case $action in
                 move_to_current) swaymsg "[con_mark=\"$mark_name\"] move to workspace current" ;;
@@ -317,8 +314,6 @@ wait_for_window () {
     	local start=$(date +%s)
 
     	case $WM in
-        	i3) cmd="i3-msg -t get_tree" 
-		    app_class=$APP_CLASS ;;
 	    	sway) cmd="swaymsg -t get_tree" ;;
         	hyprland) cmd="hyprctl clients -j" ;;
         	*) echo "EXIT_STATE on: $WM not supported"; return 1 ;;
@@ -346,7 +341,6 @@ wait_for_window () {
             		echo "Timeout waiting for window: $app_class Please make sure APP_ID is correct"
             		return 1
         	fi
-            sleep 0.05
     	done
 }
 
@@ -354,8 +348,6 @@ wait_for_window_closed() {
     	local app_class=$1
 
     	case $WM in
-        	i3) cmd="i3-msg -t get_tree" 
-		    app_class=$APP_CLASS ;;
         	sway) cmd="swaymsg -t get_tree" ;;
         	hyprland) cmd="hyprctl clients -j" ;;
         	*) echo "EXIT_STATE on: $WM not supported"; return 1 ;;
@@ -383,8 +375,27 @@ window_focus () {
 	local mark_name=$1
 	case $WM in
 		sway) swaymsg "[con_mark=\"$mark_name\"] focus" ;;
-		i3) i3-msg "[con_mark=\"$mark_name\"] focus" ;;
 		hyprland) hyprctl dispatch focuswindow address:$(cat "/tmp/${mark_name}.addr") ;;
+		*) echo "Currently not support $WM";;
+	esac
+}
+
+window_position () {
+	local mark_name=$1
+	if [ -z $OFFSET_X || $OFFSET_Y || $WIDTH || $HEIGHT ]; then
+		echo "Do not have OFFSET/SIZE in config use default in $WM .config files"
+		return 1
+	fi
+	case $WM in
+		sway) focus_rect=$(swaymsg -t get_tree | jq '.. | select(.focused? == true).rect')
+			fx=$(echo "$focus_rect" | jq .x)
+			fy=$(echo "$focus_rect" | jq .y)
+			
+			new_x=$((fx + $OFFSET_X))
+			new_y=$((fy + $OFFSET_Y))
+
+			swaymsg "[con_mark=\"$mark_name\"] move position $new_x $new_y, resize set $WIDTH $HEIGHT" 
+			;;
 		*) echo "Currently not support $WM";;
 	esac
 }
@@ -435,13 +446,11 @@ launcher_selected () {
 	wait_for_window "$app_launched"
     	
 	window_marker "$app_launched" "myapp"
+	window_position "myapp"
 	window_focus "myapp"
 	
 	rm -f "$LOCKFILE"
-	# window_ctrl "myapp" "$SCRATCHPAD_SHOW" # Dev test with rofi, You may need to move to scratchpad in WM .config 
-	# then after app start just show it, But don't needed for most app, So just noted that
 	
-	# Try to use only main launcher to block process, But for some wofi (run) app make mpv stay open even wofi close, So put while loop for check window for now..
 	wait_for_window_closed $app_launched
 	touch "$EXIT_STATE"
 }

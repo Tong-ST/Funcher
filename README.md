@@ -7,6 +7,8 @@ So my concept here to make it work with others app launcher that already great l
 ![Funcher Demo](assets/funcher_demo.gif)
 
 ## Current Stage
+NOW SUPPORT x11, for i3wm go to [Funcher/x11](https://github.com/Tong-ST/Funcher/tree/Funcher/x11) branch
+
 This is very first prototype build that just using `Shell script` as main program, also with help of `libinput` code in `C` that track user input and play different section of vdo
 
 As of current build only work well on `Wayland` i build on sway/debian 13, try to expand to hyprland but not tested yet..
@@ -99,17 +101,14 @@ For ready to use, I install in $HOME directory if you want to changes, You may n
         ### mpv setup
         for_window [title="mpv_preload"] floating enable, border none, resize set 1920 1080
 
-        ### Please Enter the exact path of where you clone to..
-        exec $HOME/Funcher/mpv_startup.sh # This can be disable I didn't notice much performance gain for the system startup, You can try it yourself
-
         ### Your app setup
-        for_window [app_id="wofi"] floating enable, border none, move position 750 240
-        for_window [app_id="calcurseTerm"] floating enable, border none, move position 630 115, resize set 600 380
-        for_window [app_id="rangerTerm"] floating enable, border none, move position 630 115, resize set 600 380
+        for_window [app_id="wofi"] floating enable, border none
+        for_window [app_id="calcurseTerm"] floating enable, border none
+        for_window [app_id="rangerTerm"] floating enable, border none
 
         ### Funcher Key-Binding
         bindsym $mod+d exec $HOME/Funcher/funcher.sh
-        bindsym $mod+shift+d exec $HOME/Funcher/funcher.sh -c $HOME/Funcher/config/wofi-run.json
+        bindsym $mod+shift+d exec $HOME/Funcher/funcher.sh -c $HOME/Funcher/config/wofi_run.json
         bindsym $mod+shift+x exec $HOME/Funcher/funcher.sh -c $HOME/Funcher/config/calcurse.json
         bindsym $mod+shift+t exec $HOME/Funcher/funcher.sh -c $HOME/Funcher/config/ranger.json
         ```
@@ -141,7 +140,6 @@ For normal use case just set keybinding for each app point those config file lik
 ## Limitation
 - mpv, So this app is just command mpv playing in background It not a lightweight build yet as i tested if you got wrong Video codec that not support ` Hardware Acceleration ` It going to tank your CPU quite a lot
 - As am i develop I found out that the reliable VDO format that play in mpv natively with transparency background right now ` .mov ` is the way to go The file are quite big but it work, I also try like .webm that really small size but can't get trans bg to work with mpv, So if i found the better way in the future will be updated
-- Still figure how to make mpv able to run --background=none on x11, If solving this problem we should be integrate to WMs like i3wm easily...If you know how please give me a sign
 - Also if we can reduce VDO size and able to keep basic need like BG transparency, HW accel, Quality Please let me know, Right now just have to trade-off with bigger VDO files but it's no lag using it realtime
 
 ## Contribution
@@ -162,7 +160,7 @@ So, If you guy interested to contribute in this project i think you already has 
 Any recommend would be golden!
 
 ## Goal
-In this very first stage i just want to expand to be reliable on others WMs currently on Sway/Wayland maybe others wayland > Than tackle with x11 if we can make mpv play transparent background on x11
+In this very first stage i just want to expand to be reliable on others window manager as soon as possible, currently on Sway/Wayland and i3/x11
 
 ## Support 
 - If you like this project consider support at [Ko-fi](https://www.ko-fi.com/goodywolf) a cup of coffees it's already whole days for me in Thailand :) haha
@@ -176,5 +174,5 @@ In this very first stage i just want to expand to be reliable on others WMs curr
 - [my own Sway .config](https://www.github.com/Tong-ST/pip-boy-sway) In case you want to see my whole setup
 
 Special thanks to creator of Fallout mods
-- [Pipboy animation mod](www.nexusmods.com/newvegas/mods/91200)
-- [Pipboy skin mod](www.nexusmods.com/newvegas/mods/91369)
+- [Fallout animation mod](https://www.nexusmods.com/newvegas/mods/91200)
+- [Pipboy skin mod](https://www.nexusmods.com/newvegas/mods/91369)

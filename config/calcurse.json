@@ -1,5 +1,5 @@
 {	
-	"_comment": ["Currently tested on sway/wayland, You can try on hyprland as well but not tested"],
+	"_comment": ["Currently tested on i3/x11 and sway/wayland, You can try on hyprland as well but not tested"],
 	"CURRENT_WM": "sway",
 	"VIDEO_PATH": "~/Funcher/assets/pip_1080p.mov",
 
@@ -17,7 +17,10 @@
 		"APP_CLASS": "Calcurse",
 		"APP_ID": "calcurseTerm",
 		"RUN_ARG": "alacritty --config-file $HOME/.config/alacritty/alac_tran.toml --class calcurseTerm -e calcurse",
-		"DELAY_START": "0.5"
+		"DELAY_START": "0.4",
+		"OFFSET_XY": ["80", "-120"],
+		"WIDTH_HEIGHT": ["600", "400"]
+
 	},
 
 	"OTHERS": {
