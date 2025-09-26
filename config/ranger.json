@@ -1,6 +1,6 @@
 {	
-	"_comment": ["Currently tested on sway/wayland, You can try on hyprland as well but not tested"],
-	"CURRENT_WM": "sway",
+	"_comment": ["Currently tested on i3/x11 and sway/wayland"],
+	"CURRENT_WM": "i3",
 	"VIDEO_PATH": "~/Funcher/assets/pip_1080p.mov",
 
 	"_comment": ["This is main Video loop must include all timestamp"],
@@ -14,10 +14,13 @@
 
 	"_comment": ["Main Launcher config use it like using in terminal"],
 	"LAUNCHER": {
-		"APP_CLASS": "Ranger",
+		"APP_CLASS": "rangerTerm",
 		"APP_ID": "rangerTerm",
 		"RUN_ARG": "alacritty --config-file $HOME/.config/alacritty/alac_tran.toml --class rangerTerm -e ranger",
-		"DELAY_START": "0.5"
+		"DELAY_START": "0.5",
+		"OFFSET_XY": ["180", "50"],
+		"WIDTH_HEIGHT": ["600", "380"]
+
 	},
 
 	"OTHERS": {

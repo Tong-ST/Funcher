@@ -2,6 +2,7 @@
 
 mpv_control="--no-config --profile=fast --title=mpv_preload \
 --hwdec=auto-copy \
+--gpu-api=opengl \
 --vo=gpu \
 --cache=yes --demuxer-max-bytes=100M \
 --demuxer-readahead-secs=3 \
