@@ -7,6 +7,8 @@ So my concept here to make it work with others app launcher that already great l
 ![Funcher Demo](assets/funcher_demo.gif)
 
 ## Current Stage
+FOR Wayland go to [main branch](https://www.github.com/Tong-ST/Funcher)
+
 This is very first prototype build that just using `Shell script` as main program, also with help of `libinput` code in `C` that track user input and play different section of vdo
 
 As of current build/test on my i3/x11 and sway/wayland in main branch

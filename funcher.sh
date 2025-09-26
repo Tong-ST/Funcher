@@ -324,7 +324,6 @@ wait_for_window () {
             		echo "Timeout waiting for window: $app_class Please make sure APP_ID is correct"
             		return 1
         	fi
-            sleep 0.05
     	done
 }
 
