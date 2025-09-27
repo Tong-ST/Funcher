@@ -382,9 +382,9 @@ window_focus () {
 
 window_position () {
 	local mark_name=$1
-	if [ -z $OFFSET_X || $OFFSET_Y || $WIDTH || $HEIGHT ]; then
-		echo "Do not have OFFSET/SIZE in config use default in $WM .config files"
-		return 1
+	if [ -z "$OFFSET_X" ] || [ -z "$OFFSET_Y" ] || [ -z "$WIDTH" ] || [ -z "$HEIGHT" ]; then
+    		echo "Do not have OFFSET/SIZE in config, using default in $WM .config files"
+    		return 1
 	fi
 	case $WM in
 		sway) focus_rect=$(swaymsg -t get_tree | jq '.. | select(.focused? == true).rect')
