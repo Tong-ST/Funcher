@@ -4,7 +4,7 @@ What it does, It just simple script that call [mpv](mpv.io) media playback to pl
 
 So my concept here to make it work with others app launcher that already great like `rofi` or you can set to run your others fav app as well
 
-<video src="https://github.com/user-attachments/assets/806ea769-bd2c-4454-89eb-c70d1a8de421" autoplay loop muted playsinline></video>
+<https://github.com/user-attachments/assets/806ea769-bd2c-4454-89eb-c70d1a8de421>
 
 ## Current Stage
 FOR Wayland go to [main branch](https://www.github.com/Tong-ST/Funcher)
