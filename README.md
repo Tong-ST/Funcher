@@ -86,6 +86,7 @@ For ready to use, I install in $HOME directory if you want to changes, You may n
     cd scripts
     make keyboard_listener
     ```
+    **IMPORTANT** x11 User please make sure you on correct branch, using ` git switch Funcher/x11 ` before do anything in folder it should say like ` Funcher git:(Funcher/x11) `
 
 2. **Setup Config**
 - In [Releases](https://github.com/Tong-ST/Funcher/releases/) you'll see pip-boy-vdo.tar.xz grab and put it on Funcher/assets
