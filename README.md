@@ -93,6 +93,7 @@ For ready to use, I install in $HOME directory if you want to changes, You may n
     
     ``` 
     tar xfv pip-boy-vdo.tar.xz
+    mkdir $HOME/Funcher/assets/
     cp pip_1080p.mov $HOME/Funcher/assets/
     ```
 - Setup your config files This setup is for `sway` only others wayland you may need different config that do the same thing
