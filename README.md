@@ -4,7 +4,7 @@ What it does, It just simple script that call [mpv](mpv.io) media playback to pl
 
 So my concept here to make it work with others app launcher that already great like `wofi` or you can set to run your others fav app as well
 
-<video src="https://github.com/user-attachments/assets/806ea769-bd2c-4454-89eb-c70d1a8de421" autoplay loop muted playsinline></video>
+<https://github.com/user-attachments/assets/806ea769-bd2c-4454-89eb-c70d1a8de421>
 
 ## Current Stage
 NOW SUPPORT x11, for i3wm go to [Funcher/x11](https://github.com/Tong-ST/Funcher/tree/Funcher/x11) branch
