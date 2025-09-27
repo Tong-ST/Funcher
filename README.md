@@ -9,6 +9,8 @@ So my concept here to make it work with others app launcher that already great l
 ## Current Stage
 NOW SUPPORT x11, for i3wm go to [Funcher/x11](https://github.com/Tong-ST/Funcher/tree/Funcher/x11) branch
 
+***Git history rewritten, who clone before 27 sep 2025, Please re-clone for update***
+
 This is very first prototype build that just using `Shell script` as main program, also with help of `libinput` code in `C` that track user input and play different section of vdo
 
 As of current build only work well on `Wayland` i build on sway/debian 13, try to expand to hyprland but not tested yet..
