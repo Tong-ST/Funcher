@@ -126,7 +126,7 @@ main () {
 	
 	# Start main APP
 	sleep $DELAY_LAUNCHER_TIMER
-	launcher_selected "$LAUNCHER" "$LAUNCHER_ARG"
+	launcher_selected "$APP_CLASS" "$LAUNCHER_ARG"
 
 	# Play exit animation also wait for last anim finished
 	while true; do
@@ -310,7 +310,6 @@ wait_for_window () {
             	or (.app_id? == $c)
             	or (.class? == $c)
             	or (.initialClass? == $c)
-		or ((.title // "") | test($c;"i"))
         	)' >/dev/null 2>&1; then
 			echo "Window: $app_class detected"
 			return 0
@@ -341,7 +340,6 @@ wait_for_window_closed() {
             	or (.app_id? == $c)
             	or (.class? == $c)
             	or (.initialClass? == $c)
-		or ((.title // "") | test($c;"i"))
         	)' >/dev/null 2>&1; do
         	sleep 0.2
 		if [ -f "$EXIT_STATE" ]; then
