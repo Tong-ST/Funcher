@@ -423,8 +423,8 @@ launcher_selected () {
 
 	wait_for_window "$app_launched"
     	
-	# In x11 For mark app using $APP_CLASS
-	window_marker "$APP_CLASS" "myapp"
+	# In x11 For mark app using CLASS, in wayland using APP_ID
+	window_marker "$app_launched" "myapp"
 	window_position "myapp"
 	window_focus "myapp"
 	

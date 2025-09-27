@@ -4,7 +4,7 @@ What it does, It just simple script that call [mpv](mpv.io) media playback to pl
 
 So my concept here to make it work with others app launcher that already great like `rofi` or you can set to run your others fav app as well
 
-<https://github.com/user-attachments/assets/806ea769-bd2c-4454-89eb-c70d1a8de421>
+<https://github.com/user-attachments/assets/3bb97c90-18a2-4c4c-9ed1-716c55fb944e>
 
 ## Current Stage
 FOR Wayland go to [main branch](https://www.github.com/Tong-ST/Funcher)
@@ -89,10 +89,10 @@ For ready to use, I install in $HOME directory if you want to changes, You may n
     **IMPORTANT** x11 User please make sure you on correct branch, using ` git switch Funcher/x11 ` before do anything in folder it should say like ` Funcher git:(Funcher/x11) `
 
 2. **Setup Config**
-- In [Releases](https://github.com/Tong-ST/Funcher/releases/) you'll see pip-boy-vdo.tar.xz grab and put it on Funcher/assets
+- In [Releases](https://github.com/Tong-ST/Funcher/releases/) you'll see pip-boy-vdo-amber.tar.xz grab and put it on Funcher/assets
     
     ``` 
-    tar xfv pip-boy-vdo.tar.xz
+    tar xfv pip-boy-vdo-amber.tar.xz
     mkdir $HOME/Funcher/assets/
     cp pip_1080p.mov $HOME/Funcher/assets/
     ```

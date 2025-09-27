@@ -12,7 +12,7 @@ configuration {
 
 * {
     selected-normal-foreground:  rgba(16, 11, 4, 65%);
-    foreground:                  rgba(86, 231, 151, 55%);
+    foreground:                  rgba(255, 182, 66, 65 %);
     highlight-foreground:	 rgba(243, 210, 145, 65 %);
     normal-foreground:           @foreground;
     alternate-normal-background: rgba ( 0, 0, 0, 0 % );
