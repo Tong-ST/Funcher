@@ -4,7 +4,7 @@ What it does, It just simple script that call [mpv](mpv.io) media playback to pl
 
 So my concept here to make it work with others app launcher that already great like `wofi` or you can set to run your others fav app as well
 
-![Funcher Demo](assets/funcher_demo.gif)
+![Funcher Demo](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZHp5NnZubmQwZGhtaXo4a3Y2MmxtczZibGhlYXlyOWhuOWt6YnFzciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6k5I1sEi78ngZX7r0V/giphy.gif)
 
 ## Current Stage
 NOW SUPPORT x11, for i3wm go to [Funcher/x11](https://github.com/Tong-ST/Funcher/tree/Funcher/x11) branch

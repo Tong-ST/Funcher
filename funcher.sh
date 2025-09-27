@@ -388,14 +388,43 @@ window_position () {
 	fi
 	case $WM in
 		sway) focus_rect=$(swaymsg -t get_tree | jq '.. | select(.focused? == true).rect')
+            		if [ -z "$focus_rect" ]; then
+                		echo "No focused window found in sway"
+                		return 1
+            		fi
+
 			fx=$(echo "$focus_rect" | jq .x)
 			fy=$(echo "$focus_rect" | jq .y)
 			
-			new_x=$((fx + $OFFSET_X))
-			new_y=$((fy + $OFFSET_Y))
+			new_x=$((fx + OFFSET_X))
+			new_y=$((fy + OFFSET_Y))
 
 			swaymsg "[con_mark=\"$mark_name\"] move position $new_x $new_y, resize set $WIDTH $HEIGHT" 
 			;;
+
+		hyprland) focus_addr=$(hyprctl clients -j | jq -r '.[] | select(.focused == true) | .address')
+            		if [ -z "$focus_addr" ]; then
+                		echo "No focused window found in Hyprland"
+                		return 1
+            		fi
+
+            		# Get focused window's geometry
+            		read fx fy fw fh < <(hyprctl clients -j | jq -r --arg addr "$focus_addr" \
+                	'.[] | select(.address==$addr) | "\(.x) \(.y) \(.width) \(.height)"')
+            
+            		new_x=$((fx + OFFSET_X))
+            		new_y=$((fy + OFFSET_Y))
+
+            		# Move and resize target window using its mark or address
+            		target_addr=$(cat "/tmp/${mark_name}.addr" 2>/dev/null)
+            		if [ -n "$target_addr" ]; then
+                		hyprctl dispatch movetoworkspace 0,address:$target_addr
+				hyprctl dispatch movewindow address:$target_addr,$new_x,$new_y
+				hyprctl dispatch resizewindow address:$target_addr,$WIDTH,$HEIGHT
+            		else
+                		echo "Target window not found for mark: $mark_name"
+            		fi
+            		;;
 		*) echo "Currently not support $WM";;
 	esac
 }
