@@ -310,8 +310,6 @@ wait_for_window () {
             	or (.app_id? == $c)
             	or (.class? == $c)
             	or (.initialClass? == $c)
-            	or ((.name // "") | test($c;"i"))
-            	or ((.title // "") | test($c;"i"))
         	)' >/dev/null 2>&1; then
 			echo "Window: $app_class detected"
 			return 0
@@ -342,8 +340,6 @@ wait_for_window_closed() {
             	or (.app_id? == $c)
             	or (.class? == $c)
             	or (.initialClass? == $c)
-            	or ((.name // "") | test($c;"i"))
-            	or ((.title // "") | test($c;"i"))
         	)' >/dev/null 2>&1; do
         	sleep 0.2
 		if [ -f "$EXIT_STATE" ]; then

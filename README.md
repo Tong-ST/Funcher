@@ -115,6 +115,11 @@ For ready to use, I install in $HOME directory if you want to changes, You may n
         ```
         These are example config and it should be self explain and look into Funcher/config/ as well
 
+        **NOTED:** If you having problem with app flickering at launch, Because in current script, Window offset/size will change after app launched, So it appear at normal size for a sec then will change offset/size respect to your Funcher/config
+        - If you want to fix that you can do like in i3 .config ` for_window [class="..."] move scratchpad ` This will set this app_id to spawn in scratchpad than it will appear as you offset/size in Funcher/config also you need to change new offset position in Funcher/config as well
+        - I didn't default it because it might interfere with your others app that share same ID and if you run on very fast CPU it won't be notice
+        - Or if you only use on 1 monitor you can just set fix spawn position in sway .config ` for_window [class="..."] move position <x> <y>, resize set <width> <height> ` and leave Funcher/config offset/size empty
+
 3. **Set up others app config** like rofi, alacritty
     ```
     cp -r $HOME/Funcher/test_config/rofi $HOME/.config/
