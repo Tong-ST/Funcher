@@ -78,6 +78,7 @@ For ready to use, I install in $HOME directory if you want to changes, You may n
     ```
     cd $HOME
     git clone https://github.com/Tong-ST/Funcher.git
+    git switch Funcher/x11
     cd Funcher
     chmod +x funcher.sh mpv_startup.sh
     cd scripts
