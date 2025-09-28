@@ -112,8 +112,10 @@ For ready to use, I install in $HOME directory if you want to changes, You may n
         ### Funcher Key-Binding
         bindsym $mod+d exec $HOME/Funcher/funcher.sh
         bindsym $mod+shift+d exec $HOME/Funcher/funcher.sh -c $HOME/Funcher/config/wofi_run.json
-        bindsym $mod+shift+x exec $HOME/Funcher/funcher.sh -c $HOME/Funcher/config/calcurse.json
-        bindsym $mod+shift+t exec $HOME/Funcher/funcher.sh -c $HOME/Funcher/config/ranger.json
+        
+        ### Others app to try, Before using you need to install in your system first in debian ` sudo apt install ranger calcurse ` Uncomment to try out
+        # bindsym $mod+shift+x exec $HOME/Funcher/funcher.sh -c $HOME/Funcher/config/calcurse.json
+        # bindsym $mod+shift+t exec $HOME/Funcher/funcher.sh -c $HOME/Funcher/config/ranger.json
         ```
         These are example config and it should be self explain and look into Funcher/config/ as well
 
@@ -133,7 +135,7 @@ For ready to use, I install in $HOME directory if you want to changes, You may n
     ``` 
     Than logout and login back see that now mpv change video segment base on your input
 
-- In some cases you might need to make funcher.sh executable `sudo chmod +x funcher.sh` But most case clone from git don't need this
+- In some cases you might need to make funcher.sh executable ` chmod +x funcher.sh ` But most case clone from git don't need this
 
 ## Usage
 For normal use case just set keybinding for each app point those config file like you see in sway .config example 
