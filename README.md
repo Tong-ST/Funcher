@@ -110,8 +110,10 @@ For ready to use, I install in $HOME directory if you want to changes, You may n
         # Keybind for Program
         bindsym $mod+d exec ~/Funcher/funcher.sh
         bindsym $alt+Tab exec $HOME/Funcher/funcher.sh -c $HOME/Funcher/config/rofi-window.json
-        bindsym $mod+shift+x exec $HOME/Funcher/funcher.sh -c $HOME/Funcher/config/calcurse.json
-        bindsym $mod+shift+t exec $HOME/Funcher/funcher.sh -c $HOME/Funcher/config/ranger.json
+
+        ### Others app to try, Before using you need to install in your system first in debian ` sudo apt install ranger calcurse ` Uncomment to try out
+        # bindsym $mod+shift+x exec $HOME/Funcher/funcher.sh -c $HOME/Funcher/config/calcurse.json
+        # bindsym $mod+shift+t exec $HOME/Funcher/funcher.sh -c $HOME/Funcher/config/ranger.json
         ```
         These are example config and it should be self explain and look into Funcher/config/ as well
 
