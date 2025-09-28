@@ -248,6 +248,7 @@ anim_control () {
 			mpv_play_segment $START
 			sleep $DELAY_LAUNCHER_TIMER
 			window_ctrl "myapp" "$SCRATCHPAD_SHOW"
+			window_focus "myapp"
 			;;
 		"hide>idle")
 			window_ctrl "myapp" "$MOVE_TO_SCRATCHPAD"
@@ -255,6 +256,7 @@ anim_control () {
 			sleep $cooldown
 			mpv_play_segment $IDLE_START
 			window_ctrl "myapp" "$SCRATCHPAD_SHOW"
+			window_focus "myapp"
 			;;
 		*)
 			mpv_play_segment $start_segment
