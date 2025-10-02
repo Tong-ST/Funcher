@@ -1,6 +1,6 @@
 # FUNCHER/x11 - App launcher that also FUN!
 
-What it does, It just simple script that call [mpv](mpv.io) media playback to play custom video and run in background..
+What it does, It just simple script that call [mpv](https://mpv.io) media playback to play custom video and run in background..
 
 So my concept here to make it work with others app launcher that already great like `rofi` or you can set to run your others fav app as well
 
